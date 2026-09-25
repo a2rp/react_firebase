@@ -1,7 +1,10 @@
 import { createElement, useEffect, useState } from "react";
 import {
   FaArrowRight,
+  FaArrowUp,
+  FaCodepen,
   FaCoffee,
+  FaEnvelope,
   FaFacebook,
   FaGithub,
   FaGlobe,
@@ -23,9 +26,11 @@ const usersCollectionRef = collection(db, "users");
 const socialLinks = [
   { label: "Portfolio", href: "https://www.ashishranjan.net/", icon: FaGlobe },
   { label: "GitHub", href: "https://github.com/a2rp", icon: FaGithub },
+  { label: "CodePen", href: "https://codepen.io/ash1198", icon: FaCodepen },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/aashishranjan", icon: FaLinkedin },
   { label: "Facebook", href: "https://www.facebook.com/theash.ashish/", icon: FaFacebook },
   { label: "YouTube", href: "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", icon: FaYoutube },
+  { label: "Email", href: "mailto:ash.ranjan09@gmail.com", icon: FaEnvelope },
 ];
 
 const supportLinks = [
@@ -42,6 +47,7 @@ function App() {
   const [busyId, setBusyId] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [showGoTop, setShowGoTop] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -65,6 +71,13 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => setShowGoTop(window.scrollY > 420);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const updateField = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
@@ -180,6 +193,7 @@ function App() {
             </div>}
           </section>
         </section>
+        {showGoTop && <button className="go-top-button" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Go to top" title="Go to top"><FaArrowUp /></button>}
       </main>
 
       <footer className="site-footer">

@@ -12,6 +12,7 @@ A responsive React and Firebase Firestore CRUD dashboard for creating users, inc
 - Delete a user and update the list immediately.
 - Loading, success, and error states for Firestore actions.
 - Fixed responsive header, local branding, and icon-only footer links.
+- Floating go-to-top control with smooth scrolling.
 
 ## Tech stack
 
